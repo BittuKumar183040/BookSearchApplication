@@ -104,7 +104,13 @@ const AddBook = ({onClose}) => {
             SVG, PNG, JPG or GIF (ideal size. 499x324px) and 
             <span className=' font-bold text-red-400'> File Size - 100KB.</span></p>
         </div>
-        
+        <div className=" bg-red-200 w-full flex items-center p-2 rounded-lg mb-2 ">
+          <BsInfo size={25} />
+          <div className=" text-xs">
+            <span className=" font-bold">Temporary Non Functional</span><br/>
+            Note: <i>Vercel platform</i> not supporting JSON -rw operation.
+          </div>
+        </div>
         <button
           type="submit"
           className="text-white flex items-center gap-2 w-fit bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm sm:w-auto pl-3 px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
