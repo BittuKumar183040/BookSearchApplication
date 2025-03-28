@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 const backendAPI = axios.create({
-  baseURL: 'http://localhost:3000',
+  baseURL: 'https://book-applicaton-backend-api.vercel.app',
 });
 
 const interceptor = (config) => {
