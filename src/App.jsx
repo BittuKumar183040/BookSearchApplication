@@ -1,19 +1,22 @@
-import './styles/App.css';
-import NavBar from './components/NavBar';
-import Search from './section/Search';
-import BookCard from './components/BookCard';
-import { useEffect, useState } from 'react';
-import backendAPI from './services/apiRequest';
-import { ToastContainer, toast } from 'react-toastify';
-import Pagination from './components/Pagination';
-import QuantitySelector from './components/QuantitySelector';
+import "./styles/App.css";
+import NavBar from "./components/NavBar";
+import Search from "./section/Search";
+import BookCard from "./components/BookCard";
+import { useEffect, useState } from "react";
+import backendAPI from "./services/apiRequest";
+import { ToastContainer, toast } from "react-toastify";
+import Pagination from "./components/Pagination";
+import QuantitySelector from "./components/QuantitySelector";
 
 function App() {
   const [books, setBooks] = useState(null);
   const [quantity, setQuantity] = useState(10);
   const [page, setPage] = useState(1);
 
+  const [loading, setLoading] = useState(false);
+
   const getBooks = async (q, p) => {
+    setLoading(true)
     try {
       const response = await backendAPI.get(`/books/${q}/${p}`);
       setBooks(response.data);
@@ -22,9 +25,11 @@ function App() {
       if (errorMsg) {
         toast(errorMsg);
       } else {
-        console.error('Unexpected error occurred:', error);
-        toast('Unexpected error occurred:');
+        console.error("Unexpected error occurred:", error);
+        toast("Unexpected error occurred:");
       }
+    } finally{
+      setLoading(false)
     }
   };
 
@@ -39,19 +44,18 @@ function App() {
 
   const handlePageChange = (e, pageNumber) => {
     if (page === pageNumber) {
-      toast('Already Rendered');
+      toast("Already Rendered");
       return 0;
     }
     setPage(pageNumber);
-    window.scrollTo({ top: 10 });
+    window.scrollTo({ top: 220 });
   };
 
   return (
     <div id="parentDiv" className=" container mx-auto">
       <ToastContainer position="top-right" autoClose={3000} />
       <NavBar />
-      <Search setBooks={setBooks} />
-      {/* <AddBook /> */}
+      <Search setBooks={setBooks} setLoading={setLoading}/>
       <div>
         <QuantitySelector
           books={books}
@@ -61,7 +65,7 @@ function App() {
           handleBookQuantity={handleBookQuantity}
         />
 
-        {books && <BookCard books={books} />}
+        {books && <BookCard books={books} loading={loading} />}
 
         {!books?.string && (
           <Pagination
