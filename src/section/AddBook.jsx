@@ -2,6 +2,7 @@ import React from 'react';
 import { BiPlus } from 'react-icons/bi';
 import backendAPI from '../services/apiRequest';
 import { toast } from 'react-toastify';
+import { BsInfo } from "react-icons/bs";
 
 const Label = ({ title }) => {
   return <label className="block tracking-wider bg-slate-50 rounded-t-md w-fit p-1 px-5 border border-gray-300 border-b-0 translate-y-[8px] capitalize text-sm font-medium text-gray-900 dark:text-white" htmlFor={title}>
